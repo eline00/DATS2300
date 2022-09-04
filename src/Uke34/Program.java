@@ -1,8 +1,10 @@
+package Uke34;
+
 import java.util.Arrays;
 import java.util.Random;
 
 public class Program {
-    public static int kostnader(int[] a)  // legges i class Program
+    public static int kostnader(int[] a)  // legges i class Uke34.Program
     {
         int m = 0;
         for (int i = 1; i < a.length; i++) {}  // en tom blokk
@@ -102,7 +104,7 @@ public class Program {
     }
 
     public static void main(String[] args) {
-        // main-metoden i class Program skal nå inneholde:
+        // main-metoden i class Uke34.Program skal nå inneholde:
         int n = 100_000, antall = 2_000; // tabellstørrelse og gjentagelser
         long tid = 0;                    // for tidsmåling
         int a[] = randPerm(n);           // en permutasjon av 1, . .  n

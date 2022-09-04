@@ -1,3 +1,5 @@
+package Uke34;
+
 import java.util.Arrays;
 
 public class minmaks {
