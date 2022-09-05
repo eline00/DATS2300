@@ -118,6 +118,4 @@ public class Tabell     // Samleklasse for tabellmetoder
     public static void skrivln(int[] a) {
         skrivln(a, 0, a.length);
     }
-
-
 }
