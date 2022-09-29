@@ -17,5 +17,6 @@ public class Program3_2_4 {
         System.out.println(liste);
         liste.fjernHvis(x -> x.equals("deg"));
         System.out.println(liste);
+        liste.forEach(x -> System.out.print(x + " "));
     }
 }

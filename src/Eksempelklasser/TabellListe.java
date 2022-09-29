@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class TabellListe<T> implements Liste<T>
@@ -95,6 +96,13 @@ public class TabellListe<T> implements Liste<T>
 
             System.arraycopy(a, denne + 1, a, denne, antall - denne);  // tetter igjen
             a[antall] = null;   // verdien som lå lengst til høyre nulles
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> action) {
+            while (denne < antall) {
+                action.accept(a[denne++]);
+            }
         }
     }  // TabellListeIterator
 
@@ -209,6 +217,13 @@ public class TabellListe<T> implements Liste<T>
 
         antall = nyttAntall;
         return fjernet;
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> action) {
+        for (int i = 0; i < antall; i++) {
+            action.accept(a[i]);
+        }
     }
 
     @Override
