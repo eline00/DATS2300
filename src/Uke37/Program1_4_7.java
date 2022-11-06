@@ -1,8 +1,6 @@
 package Uke37;
 
-import Eksempelklasser.Komparator;
 import Eksempelklasser.Person;
-import Tabell.Tabell;
 
 import java.util.Arrays;
 

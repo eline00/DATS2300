@@ -2,12 +2,10 @@ package Uke37;
 
 import Eksempelklasser.Heltall;
 import Eksempelklasser.Person;
-import Tabell.Tabell;
+import Tabeller.Tabell;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 import static java.util.Arrays.sort;
 

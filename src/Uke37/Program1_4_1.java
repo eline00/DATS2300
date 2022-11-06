@@ -1,6 +1,6 @@
 package Uke37;
 
-import Tabell.Tabell;
+import Tabeller.Tabell;
 
 public class Program1_4_1 {
     public static void main(String[] args) {

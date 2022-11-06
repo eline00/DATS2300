@@ -1,6 +1,6 @@
 package Uke35;
 
-import Tabell.Tabell;
+import Tabeller.Tabell;
 
 public class Program
 {

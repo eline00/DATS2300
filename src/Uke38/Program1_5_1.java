@@ -1,7 +1,7 @@
 package Uke38;
 
 
-import static Tabell.Tabell.bytt;
+import static Tabeller.Tabell.bytt;
 
 public class Program1_5_1 {
 

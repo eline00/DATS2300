@@ -1,7 +1,5 @@
 package Uke36;
 
-import java.util.Arrays;
-
 public class Program {
     public static void main(String[] args) {
         /* 1.3.1
@@ -35,7 +33,7 @@ public class Program {
          */
 
         int[] a = {1, 3, 4, 4, 5, 7, 7, 8, 9, 10, 10, 12, 15, 15, 15};
-        System.out.println(Tabell.Tabell.binærsøk3(a, 0, a.length, 15));
+        System.out.println(Tabeller.Tabell.binærsøk3(a, 0, a.length, 15));
 
     }
 }

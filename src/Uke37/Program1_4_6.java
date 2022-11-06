@@ -1,10 +1,10 @@
 package Uke37;
 
-import Eksempelklasser.Komparator;
+import Grensesnitt.Komparator;
 import Eksempelklasser.Person;
 import Eksempelklasser.Student;
 import Eksempelklasser.Studium;
-import Tabell.Tabell;
+import Tabeller.Tabell;
 
 import java.util.Arrays;
 

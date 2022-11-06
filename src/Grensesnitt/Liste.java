@@ -1,4 +1,4 @@
-package Eksempelklasser;
+package Grensesnitt;
 
 import java.util.Iterator;
 

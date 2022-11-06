@@ -1,4 +1,4 @@
-package Eksempelklasser;
+package Grensesnitt;
 
 @FunctionalInterface
 public interface Komparator<T>      // et funksjonsgrensesnitt

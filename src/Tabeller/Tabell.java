@@ -1,6 +1,4 @@
-package Tabell;
-
-import Eksempelklasser.Komparator;
+package Tabeller;
 
 import java.util.*;
 

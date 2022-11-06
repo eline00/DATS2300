@@ -2,7 +2,7 @@ package Uke37;
 
 import Eksempelklasser.Student;
 import Eksempelklasser.Studium;
-import Tabell.Tabell;
+import Tabeller.Tabell;
 
 public class Program1_4_5 {
     public static void main(String[] args) {

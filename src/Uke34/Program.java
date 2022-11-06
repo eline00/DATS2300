@@ -1,11 +1,6 @@
 package Uke34;
 
-import Tabell.Tabell;
-
-import java.util.Arrays;
-import java.util.Random;
-
-import static Tabell.Tabell.randPerm;
+import static Tabeller.Tabell.randPerm;
 
 public class Program {
     public static int kostnader(int[] a)  // legges i class Uke34.Program

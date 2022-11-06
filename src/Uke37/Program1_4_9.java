@@ -4,8 +4,7 @@ import java.awt.*;
 import java.util.Comparator;
 
 import Eksempelklasser.Dato;
-import Eksempelklasser.Komparator;
-import Tabell.Tabell;
+import Tabeller.Tabell;
 
 public class Program1_4_9 {
     public static void main(String[] args) {

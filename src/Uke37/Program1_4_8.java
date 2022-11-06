@@ -1,8 +1,5 @@
 package Uke37;
 
-import Eksempelklasser.Komparator;
-import Tabell.Tabell;
-
 import java.util.Arrays;
 
 public class Program1_4_8 {

@@ -1,11 +1,8 @@
 package Eksempelklasser;
 
-import org.w3c.dom.ls.LSOutput;
+import Grensesnitt.Liste;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -13,6 +10,7 @@ public class TabellListe<T> implements Liste<T>
 {
     private T[] a;
     private int antall;
+    private int endringer;
 
     @SuppressWarnings("unchecked")          // pga. konverteringen: Object[] -> T[]
     public TabellListe(int størrelse)       // konstruktør
@@ -56,12 +54,14 @@ public class TabellListe<T> implements Liste<T>
             }
         }
         antall = 0;
+        endringer++;
     }
 
     // Skal ligge som en indre klasse i class TabellListe
     private class TabellListeIterator implements Iterator<T>
     {
         private int denne = 0;       // instansvariabel
+        private int iteratorendringer = endringer;      // ny variabel
 
         public boolean hasNext()     // sjekker om det er flere igjen
         {
@@ -70,20 +70,29 @@ public class TabellListe<T> implements Liste<T>
 
         private boolean fjernOK = false;   // ny instansvariabel i TabellListeIterator
 
-        public T next()                    // ny versjon
+        public T next()
         {
+            if (iteratorendringer != endringer)
+            {
+                throw new ConcurrentModificationException("Listen er endret!");
+            }
+
             if (!hasNext())
+            {
                 throw new NoSuchElementException("Tomt eller ingen verdier igjen!");
+            }
 
             T denneVerdi = a[denne];   // henter aktuell verdi
             denne++;                   // flytter indeksen
             fjernOK = true;            // nå kan remove() kalles
-
             return denneVerdi;         // returnerer verdien
         }
 
-        public void remove()         // ny versjon
+        public void remove()
         {
+            if (iteratorendringer != endringer) throw new
+                    ConcurrentModificationException("Listen er endret!");
+
             if (!fjernOK) throw
                     new IllegalStateException("Ulovlig tilstand!");
 
@@ -91,11 +100,17 @@ public class TabellListe<T> implements Liste<T>
 
             // verdien i denne - 1 skal fjernes da den ble returnert i siste kall
             // på next(), verdiene fra og med denne flyttes derfor en mot venstre
+
             antall--;           // en verdi vil bli fjernet
             denne--;            // denne må flyttes til venstre
 
-            System.arraycopy(a, denne + 1, a, denne, antall - denne);  // tetter igjen
+            // tetter igjen
+            System.arraycopy(a, denne + 1, a, denne, antall - denne);
+
             a[antall] = null;   // verdien som lå lengst til høyre nulles
+
+            endringer++;
+            iteratorendringer++;
         }
 
         @Override
@@ -133,6 +148,7 @@ public class TabellListe<T> implements Liste<T>
 
         T gammelverdi = a[indeks];      // tar vare på den gamle verdien
         a[indeks] = verdi;              // oppdaterer
+        endringer++;
         return gammelverdi;             // returnerer den gamle verdien
     }
 
@@ -146,6 +162,7 @@ public class TabellListe<T> implements Liste<T>
                 System.arraycopy(a, i + 1, a, i, antall - i);
 
                 a[antall] = null;
+                endringer++;
                 return true;
             }
         }
@@ -161,6 +178,7 @@ public class TabellListe<T> implements Liste<T>
         System.arraycopy(a, indeks + 1, a, indeks, antall - indeks);
         a[antall] = null;   // tilrettelegger for "søppeltømming"
 
+        endringer++;
         return verdi;
     }
 
@@ -174,6 +192,7 @@ public class TabellListe<T> implements Liste<T>
         }
 
         a[antall++] = verdi;    // setter inn ny verdi
+        endringer++;
         return true;            // vellykket innlegging
     }
 
@@ -189,6 +208,7 @@ public class TabellListe<T> implements Liste<T>
         System.arraycopy(a, indeks, a, indeks + 1, antall - indeks);
 
         a[indeks] = verdi;     // setter inn ny verdi
+        endringer++;
         antall++;              // vellykket innlegging
     }
 
@@ -215,9 +235,12 @@ public class TabellListe<T> implements Liste<T>
         }
         boolean fjernet = nyttAntall < antall;
 
+        if (fjernet) endringer++;
+
         antall = nyttAntall;
         return fjernet;
     }
+
 
     @Override
     public void forEach(Consumer<? super T> action) {
