@@ -400,15 +400,13 @@ public class BinTre<T> implements Iterable<T> {         // et generisk binærtre
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         StringJoiner s = new StringJoiner(", ", "[", "]");
         if (!tom()) inorden(x -> s.add(x != null ? x.toString() : "null"));
         return s.toString();
     }
 
-    private static <T> Node<T> random(int n, Random r)
-    {
+    private static <T> Node<T> random(int n, Random r) {
         if (n == 0) return null;                      // et tomt tre
         else if (n == 1) return new Node<>(null);     // tre med kun en node
 
@@ -420,8 +418,7 @@ public class BinTre<T> implements Iterable<T> {         // et generisk binærtre
         return new Node<>(null,venstre,høyre);
     }
 
-    public static <T> BinTre<T> random(int n)
-    {
+    public static <T> BinTre<T> random(int n) {
         if (n < 0) throw new IllegalArgumentException("Må ha n >= 0!");
 
         BinTre<T> tre = new BinTre<>();
@@ -430,6 +427,23 @@ public class BinTre<T> implements Iterable<T> {         // et generisk binærtre
         tre.rot = random(n,new Random());   // kaller den private metoden
 
         return tre;
+    }
+
+    public boolean erMintre(Comparator<? super T> c) { // legges i BinTre
+        if (rot == null) return true;    // et tomt tre er et minimumstre
+        else return erMintre(rot,c);     // kaller den private hjelpemetoden
+    }
+
+    private static <T> boolean erMintre(Node<T> p, Comparator<? super T> c) {
+        if (p.venstre != null) {
+            if (c.compare(p.venstre.verdi,p.verdi) < 0) return false;
+            if (!erMintre(p.venstre,c)) return false;
+        }
+        if (p.høyre != null) {
+            if (c.compare(p.høyre.verdi,p.verdi) < 0) return false;
+            if (!erMintre(p.høyre,c)) return false;
+        }
+        return true;
     }
 
     public Iterator<T> iterator()     // skal ligge i class BinTre
@@ -556,8 +570,5 @@ public class BinTre<T> implements Iterable<T> {         // et generisk binærtre
             return p != null;
         }
     } // InordenIterator
-
-
-
 
 } // class BinTre<T>
